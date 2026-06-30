@@ -55,7 +55,7 @@ public:
             // this is a O(1) opereation as we are just changing pointers and not shifiting array elements 
     }
 //FUNCTION
-    void remove(Node* node){
+    void removeNode(Node* node){
 
         Node* p=node->prev;
         Node* n=node->next;
@@ -81,7 +81,7 @@ public:
 
 //FUNCTION(helper function)
     void moveToFront(Node* node){
-        remove(node);
+        removeNode(node);
         insertFront(node);
     }
 
@@ -103,34 +103,23 @@ public:
             Node* node = cache[key];
             node->value = value;
             moveToFront(node);
-//----------------------------will need to add return here when we sort out the common code at last--------------------------------------------------------------------------------------------
+            return;
         }
         //now two more cases
         //1) if not present and cache has space left
         //2) if not present and cache is full
-        else{
-            if(cache.size()==capacity){//means full
+        if(cache.size()==capacity){//means full
                 Node* LRU = tail-> prev;
-                remove(LRU);                   //removed from doubly linked list
+                removeNode(LRU);                   //removed from doubly linked list
                 cache.erase(LRU->key);          // delete from hashmaps
                 delete LRU;                     // delete it
                 //least recently used node deleted
-
-                //now make a new node and assign it the value
-                Node* node= new Node(key,value);
-                insertFront(node);
-                cache[key]=node;
-
             }
-            else{
-                Node* node= new Node(key,value);
-                insertFront(node);
-                cache[key]=node;
-            }
-
-            
-        }
-        
+        //cause we have to do it in both cases as a last step
+        //making new node and adding it to hashmaps
+        Node* node= new Node(key,value);
+        insertFront(node);
+        cache[key]=node;       
     }
 };
 
@@ -138,14 +127,16 @@ int main(){
 
     LRUCache cache(3);
         // 3 is the maximum capacity
-    Node* A=new Node(1,10);
-    Node* B=new Node(2,20);
-    Node* C=new Node(3,30);
+    cache.put(1,10);
+    cache.put(2,20);
+    cache.put(3,30);
 
-    cache.insertFront(A);
-    cache.insertFront(B);
-    cache.insertFront(C);
+    cache.print();
 
+    cout<< cache.get(1)<<endl;
+    cache.print();
+
+    cache.put(4,40);
     cache.print();
 
     return 0;
