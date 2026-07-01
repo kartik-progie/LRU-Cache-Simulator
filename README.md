@@ -13,3 +13,8 @@ A C++ implementation of the Least Recently Used (LRU) Cache using:
 - Hash Map
 - OOP concepts
 
+----------------------------------------INCOMPLETE--------------------------------------------------------------------------------
+LFU CODE NOT ADDED YET
+GRAPHS AND CHARTS NOT EXPLAINED YET
+NOTHING ABOUT REAL WORLD WORKLOAD
+BASICALLY THE LAST TWO POINTS OF THE PROJECT IS STILL INCOMPLETE
