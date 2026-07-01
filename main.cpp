@@ -87,9 +87,9 @@ public:
     }
 
     int get(int key){
-        if(cache.find(key)==cache.end())  //  |
+        if(cache.find(key)==cache.end()){ //  |
             return -1;                    //  |
-                                          //  | hashmap lookup
+        }                                 //  | hashmap lookup
         Node* node = cache[key];          //  | takes O(1)
 
         moveToFront(node); //removing and move to front both performed in O(1) TC here also
@@ -124,6 +124,18 @@ public:
         insertFront(node);
         cache[key]=node;       
     }
+
+    //Destructor
+    ~LRUCache(){
+
+        Node* curr = head;
+        while(curr){
+            Node* next = curr->next;
+            delete curr;
+            curr = next;
+        }
+    }
+
 };
 
 int main(){
