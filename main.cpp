@@ -70,6 +70,7 @@ public:
 
         Node* curr=head->next;
 
+        cout<<"Cache: ";
         while(curr!=tail){
             cout<<"("<<curr->key<<","<<curr->value<<") ";
             curr=curr->next;
@@ -98,6 +99,8 @@ public:
     }
 
     void put(int key, int value){
+        if(capacity==0) return;
+
          //if node with same key is present already 
         if(cache.find(key) != cache.end()){
             Node* node = cache[key];
@@ -138,6 +141,5 @@ int main(){
 
     cache.put(4,40);
     cache.print();
-
     return 0;
 }
